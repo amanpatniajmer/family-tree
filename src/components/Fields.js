@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { database, storage } from '../Firebase'
 import { useHistory } from 'react-router-dom'
-import aj from '../images/aman passport.jpg'
 
 const Fields = ({ person, setperson, refe, location }) => {
     const history = useHistory();
