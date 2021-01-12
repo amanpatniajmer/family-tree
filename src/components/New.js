@@ -4,8 +4,8 @@ import { useHistory } from 'react-router-dom'
 import { Context } from "../context/Context";
 
 const New = () => {
-    const [id, setid] = useState();
-    const [email, setemail] = useState();
+    const [id, setid] = useState('');
+    const [email, setemail] = useState('');
     //eslint-disable-next-line
     const [loading, setloading] = useContext(Context)
     useEffect(() => {

@@ -42,7 +42,7 @@ const Form = ({ location }) => {
                     alert('Bad Parameters given')
                     return;
                 }
-                console.log(result.val())
+                /* console.log(result.val()) */
             })
             let refTemp = 'users/' + path[0] + '/';
             for (let i = 1; i < path.length; ++i) {
@@ -50,7 +50,7 @@ const Form = ({ location }) => {
             }
             setref(refTemp)
             database().ref(refTemp).once('value', (result) => {
-                console.log(result.val())
+                /* console.log(result.val()) */
                 setperson(result.val())
             })
 
