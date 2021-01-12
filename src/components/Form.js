@@ -24,6 +24,10 @@ const Form = ({ location }) => {
         let query = queryString.parse(location.search)
         setcompletepath(query.path)
         setmode(query.mode)
+        if(!query.path){
+            alert('Bad Parameters')
+            return;
+        }
         setpath(query.path.split('/'))
         //eslint-disable-next-line
     }, [history.location])
@@ -33,6 +37,11 @@ const Form = ({ location }) => {
         if (path) {
             database().ref('users/'+path[0]).once('value', (result) => {
                 setallrecords(result.val())
+                if(!result.val()){
+                    setloading(false);
+                    alert('Bad Parameters given')
+                    return;
+                }
                 console.log(result.val())
             })
             let refTemp = 'users/' + path[0] + '/';
@@ -46,6 +55,7 @@ const Form = ({ location }) => {
             })
 
         }
+        //eslint-disable-next-line
     }, [path])
 
     useEffect(() => {

@@ -1,7 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { Context } from "../context/Context";
+import React, { useEffect, useState } from 'react'
 import database from '../Firebase'
-import {Redirect, useHistory} from 'react-router-dom'
+import { useHistory} from 'react-router-dom'
 
 const Fields = ({ person, setperson,refe,location }) => {
     const history=useHistory();
@@ -10,9 +9,9 @@ const Fields = ({ person, setperson,refe,location }) => {
         if(!person.children){
             setperson((prev)=>({...prev,children:[]}))
         }
+        //eslint-disable-next-line
     }, [])
     const [loading, setLoading] = useState(false);
-    const [redirect, setredirect] = useState(false)
 
     const add = (e) => {
         e.preventDefault();

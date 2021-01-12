@@ -51,8 +51,13 @@ body {
 }
 
 a {
-  /* color: var(--primary-color);
-  text-decoration: none; */
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.form-container > span >a{
+ text-decoration:underline;
+ color:blue
 }
 
 a:hover {

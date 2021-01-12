@@ -1,11 +1,8 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import database from '../Firebase';
 
 const Links = ({ person, setperson, location, refe }) => {
 
-    useEffect(() => {
-        console.log(location)
-    }, [])
     const deleteChild = (index) => {
         console.log(refe + "children/" + index.toString())
         database().ref(refe + "children/" + index.toString()).remove().then(() => {

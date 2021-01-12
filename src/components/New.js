@@ -6,9 +6,11 @@ import { Context } from "../context/Context";
 const New = () => {
     const [id, setid] = useState();
     const [email, setemail] = useState();
+    //eslint-disable-next-line
     const [loading, setloading] = useContext(Context)
     useEffect(() => {
         setloading(false);
+        //eslint-disable-next-line
     }, [])
     const history = useHistory();
     const newRecord = () => {
@@ -51,7 +53,7 @@ const New = () => {
                     setemail(val)
                 }} placeholder="Enter email" />
             </div>
-            <button onClick={newRecord} className="btn btn-block"> Create new <i className="fa fa-plus" /> </button>
+            <button onClick={newRecord} className="btn btn-block btn-success"> Create new <i className="fa fa-plus" /> </button>
 
             <br />
             <center>OR</center>
