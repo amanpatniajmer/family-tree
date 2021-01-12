@@ -45,6 +45,7 @@ const New = () => {
     return (
         <div className="form-container">
             <h1>Welcome!</h1>
+            <h3 className="text-success">Family Tree <i className="fa fa-tree text-success"/></h3>
             <br />
 
             <span className="">Create new record to proceed</span>
@@ -56,7 +57,7 @@ const New = () => {
                     setphone(val)
                 }} placeholder="Enter mobile no" />
             </div>
-            <button type="submit" className="btn btn-block btn-success"> Create new <i className="fa fa-plus" /> </button>
+            <button type="submit" className="btn btn-block btn-success"> Submit <i className="fa fa-plus" /> </button>
             </form>
             <br />
             <center>OR</center>
@@ -68,7 +69,7 @@ const New = () => {
                     setid(val)
                 }} placeholder="Enter registered mobile no" />
                 <button type="submit" className="btn btn-dark btn-block" style={{ marginRight: "0" }}>
-                    <span className="optional">Edit </span> <i className="fa fa-edit" style={{ marginRight: "0" }} /> </button>
+                    <span className="optional">Submit </span> <i className="fa fa-edit" style={{ marginRight: "0" }} /> </button>
             </form>
         </div>
     )

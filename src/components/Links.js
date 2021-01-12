@@ -34,7 +34,7 @@ const Links = ({ person, setperson, location, refe }) => {
             <br/>
             </div>
             <div>
-            <h3 style={{ borderBottom: "1px solid #ececec" }}>Children</h3>
+            {person.noc!==0 && <h3 style={{ borderBottom: "1px solid #ececec" }}>Children</h3>}
             {   person.children &&
                 person.children.map((i, index) => {
                     return <div key={index} style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", margin: "20px" }}>
@@ -44,6 +44,7 @@ const Links = ({ person, setperson, location, refe }) => {
 
                             }
                             }>
+                            <span className="btn btn-white">{index+1}</span>
                             <span>Name: {i.name}
                                 <span style={{float:"right"}}>
                                     <i className="btn btn-danger fa fa-trash" onClick={() => deleteChild(index)} />
@@ -52,18 +53,19 @@ const Links = ({ person, setperson, location, refe }) => {
 
                             <span>Gender: {i.gender}</span>
                             <span>Partner: {i.partner}</span>
-                            <span>No of Children: {i.noc}
+                            {i.gender==="Male" && <span>No of Children: {i.noc}</span>}
 
-                            </span>
                             <div style={{textAlign:"center"}}>
-                                <span style={{ marginLeft: "auto"}}>
+                                {i.name && <span style={{ marginLeft: "auto"}}>
                                     <a href={`/add?path=${location}/${index}`} style={{textDecoration:"none" }} className="btn btn-dark">
                                         Children <i className="fa fa-edit" /></a>
-                                </span>
+                                </span>}
+                                
                                 <span>
                                     <a href={`/add?path=${location}/${index}&mode=edit`} style={{textDecoration:"none" }} className="btn btn-dark">
-                                        Edit Information <i className="fa fa-edit" /></a>
+                                         <i className="fa fa-edit" style={{margin:"0"}}/></a>
                                 </span>
+                                
                             </div>
                         </div>
                     </div>

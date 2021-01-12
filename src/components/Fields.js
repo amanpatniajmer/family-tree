@@ -93,6 +93,7 @@ const Fields = ({ person, setperson, refe, location }) => {
                 placeholder="Enter name"
                 autoComplete="off"
             />
+            {gender==="Male" && <>
             <label>Number of children</label>
             <input
                 type="number"
@@ -114,6 +115,7 @@ const Fields = ({ person, setperson, refe, location }) => {
                 autoComplete="off"
                 required
             />
+            </>}
             <button type="submit" className="btn btn-block btn-success">
                 {loading ? <i className="fa fa-spinner fa-spin" /> : "Submit"}
             </button>

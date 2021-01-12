@@ -80,7 +80,7 @@ const Form = ({ location }) => {
                                     //eslint-disable-next-line
                                 (partialpath && eval(partialpath[index]+".name")
 
-                                ) || item} </span>
+                                ) || Number(item)+1} </span>
                             </a>
                             / </span>
                     })
