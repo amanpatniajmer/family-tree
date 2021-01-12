@@ -50,8 +50,8 @@ const New = () => {
             <span className="">Create new record to proceed</span>
             <form onSubmit={newRecord}>
             <div className="form-group">
-                <label className="">Mobile No</label>
-                <input type="phone" maxLength="10" minLength="10" value={phone} onChange={(e) => {
+                <label className="">Mobile No (10 digits)</label>
+                <input type="tel" pattern="[0-9]{10}" value={phone} onChange={(e) => {
                     const val = e.target.value;
                     setphone(val)
                 }} placeholder="Enter mobile no" />
@@ -63,7 +63,7 @@ const New = () => {
             <br />
             <span className="">Edit an existing record</span>
             <form onSubmit={editRecord}>
-                <input type="phone" maxLength="10" minLength="10" value={id} onChange={(e) => {
+                <input type="tel" pattern="[0-9]{10}" value={id} onChange={(e) => {
                     const val = e.target.value;
                     setid(val)
                 }} placeholder="Enter registered mobile no" />

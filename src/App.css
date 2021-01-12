@@ -464,7 +464,7 @@ label {
 
 input[type="text"],
 input[type="file"],
-input[type="phone"],
+input[type="tel"],
 input[type="number"],
 input[type="email"],
 input[type="password"],
