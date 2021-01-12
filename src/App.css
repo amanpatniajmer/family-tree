@@ -464,6 +464,7 @@ label {
 
 input[type="text"],
 input[type="file"],
+input[type="phone"],
 input[type="number"],
 input[type="email"],
 input[type="password"],
@@ -499,6 +500,8 @@ button {
   padding: 1rem 2rem;
   width: 100%;
   border: 2px solid black;
+  border-radius: 10px;
+  box-shadow: 4px 4px 5px rgb(0 0 0 / 20%);
 }
 
 .form-container h1,

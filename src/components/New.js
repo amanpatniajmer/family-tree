@@ -1,11 +1,11 @@
 import React, { useEffect, useContext, useState } from 'react'
-import {database} from '../Firebase'
+import { database } from '../Firebase'
 import { useHistory } from 'react-router-dom'
 import { Context } from "../context/Context";
 
 const New = () => {
     const [id, setid] = useState('');
-    const [email, setemail] = useState('');
+    const [phone, setphone] = useState('');
     //eslint-disable-next-line
     const [loading, setloading] = useContext(Context)
     useEffect(() => {
@@ -13,11 +13,12 @@ const New = () => {
         //eslint-disable-next-line
     }, [])
     const history = useHistory();
-    const newRecord = () => {
+    const newRecord = (e) => {
+        e.preventDefault();
         setloading(true)
-        
-        database().ref('users/' + email.replace(/\./g,'')).update(
-            { name: '', gender: 'Male', partner: '', noc: 0, imageURL:'',children: null },
+
+        database().ref('users/' + phone.replace(/\./g, '')).update(
+            { name: '', gender: 'Male', partner: '', noc: 0, imageURL: '', children: null },
             (error) => {
                 if (error) {
                     setloading(false)
@@ -25,17 +26,18 @@ const New = () => {
                 }
                 else {
                     setloading(false)
-                    localStorage.setItem('id', email.replace(/\./g,''))
+                    localStorage.setItem('id', phone.replace(/\./g, ''))
                     console.log('Done')
                     history.push(`/add?path=${localStorage.getItem('id')}&mode=edit`)
                 }
-        })
+            })
 
     }
 
-    const editRecord = () => {
+    const editRecord = (e) => {
+        e.preventDefault();
         setloading(true)
-        localStorage.setItem('id', id.replace(/\./g,''))
+        localStorage.setItem('id', id.replace(/\./g, ''))
         console.log('Done')
         history.push(`/add?path=${localStorage.getItem('id')}`)
 
@@ -46,27 +48,28 @@ const New = () => {
             <br />
 
             <span className="">Create new record to proceed</span>
+            <form onSubmit={newRecord}>
             <div className="form-group">
-                <label className="">Enter Email</label>
-                <input type="email" value={email} onChange={(e) => {
+                <label className="">Mobile No</label>
+                <input type="phone" maxLength="10" minLength="10" value={phone} onChange={(e) => {
                     const val = e.target.value;
-                    setemail(val)
-                }} placeholder="Enter email" />
+                    setphone(val)
+                }} placeholder="Enter mobile no" />
             </div>
-            <button onClick={newRecord} className="btn btn-block btn-success"> Create new <i className="fa fa-plus" /> </button>
-
+            <button type="submit" className="btn btn-block btn-success"> Create new <i className="fa fa-plus" /> </button>
+            </form>
             <br />
             <center>OR</center>
             <br />
-            <span className="">Edit an existing Record by EMAIL</span>
-            <div>
-                <input type="email" value={id} onChange={(e) => {
+            <span className="">Edit an existing record</span>
+            <form onSubmit={editRecord}>
+                <input type="phone" maxLength="10" minLength="10" value={id} onChange={(e) => {
                     const val = e.target.value;
                     setid(val)
-                }} placeholder="Enter registered email" />
-                <button onClick={editRecord} className="btn btn-dark btn-block" style={{ marginRight: "0" }}>
-                    <span className="optional">Edit this</span> <i className="fa fa-edit" style={{ marginRight: "0" }} /> </button>
-            </div>
+                }} placeholder="Enter registered mobile no" />
+                <button type="submit" className="btn btn-dark btn-block" style={{ marginRight: "0" }}>
+                    <span className="optional">Edit </span> <i className="fa fa-edit" style={{ marginRight: "0" }} /> </button>
+            </form>
         </div>
     )
 }

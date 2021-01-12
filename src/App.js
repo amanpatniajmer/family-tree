@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { ContextProvider } from './context/Context';
 import New from './components/New';
 import Tree from './components/Tree';
+import ErrorBoundary from "./components/ErrorBoundary";
 /* import Tree from './Tree'; */
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
 
   }, [])
   return (
+    <ErrorBoundary>
     <Router>
       <ContextProvider>
         <Switch>
@@ -34,6 +36,7 @@ function App() {
         </Switch>
       </ContextProvider>
     </Router>
+    </ErrorBoundary>
   );
 }
 

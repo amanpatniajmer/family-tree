@@ -13,19 +13,27 @@ const Links = ({ person, setperson, location, refe }) => {
     }
 
     return (
+        <>
         <div>
-            <div className="container badge-success" style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+            <div className="container alert-success" style={{position:"relative",width:"100%", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
                 <h3 style={{ borderBottom: "1px solid #ececec" }}>
                     <span>Parent</span>
                     <span style={{ float: "right" }}>
                         <a href={`/add?path=${location}&mode=edit`}><i className="btn fa fa-edit" style={{ margin: "0" }} /></a>
                     </span>
                 </h3>
+                <div  style={{position:"relative", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+                    {person.imageURL && 
+                    <img src={person.imageURL} style={{position:"absolute",top:6,right:0}} className="round-img logo" alt="l" />
+                    }
                 <span>Name: {person.name}</span>
                 <span>Gender: {person.gender}</span>
                 <span>Partner: {person.partner}</span>
+                </div>
             </div>
             <br/>
+            </div>
+            <div>
             <h3 style={{ borderBottom: "1px solid #ececec" }}>Children</h3>
             {   person.children &&
                 person.children.map((i, index) => {
@@ -63,6 +71,7 @@ const Links = ({ person, setperson, location, refe }) => {
             }
 
         </div>
+        </>
     )
 }
 

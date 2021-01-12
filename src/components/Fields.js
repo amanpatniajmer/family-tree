@@ -4,7 +4,6 @@ import { useHistory } from 'react-router-dom'
 
 const Fields = ({ person, setperson, refe, location }) => {
     const history = useHistory();
-    const [showimage, setshowimage] = useState(true)
     const [status, setstatus] = useState(0)
     const { name, gender, noc, partner, children, imageURL } = person;
     useEffect(() => {
@@ -21,7 +20,7 @@ const Fields = ({ person, setperson, refe, location }) => {
         database().ref(refe).update(person).then((result) => {
             console.log("Success", result)
             setLoading(false)
-            history.goBack()
+            history.push(`/add?path=${location}`)
         })
     }
     return (<>
@@ -55,27 +54,31 @@ const Fields = ({ person, setperson, refe, location }) => {
             <label>Passport/close-up pic</label>
             <br />
             
-            {showimage && imageURL ? <button type="button" className="btn" onClick={()=>setshowimage(false)}>Change Picture</button>
+            {imageURL ? 
+            <>
+            <img src={imageURL} className="round-img logo" alt="l" /><br/>
+            <button type="button" className="btn" onClick={()=>setperson((prev) => ({ ...prev, imageURL: '' }))}>Change Picture</button></>
             :<input type="file" name="imageURL" accept="image/*"
                 onChange={(e) => {
                     const val = e.target.files[0];
-                    console.log(val)
                     var task=storage().ref(refe).put(val)
                     task.on('state_changed',(snapshot) => {
                         setstatus(snapshot.bytesTransferred*100/snapshot.totalBytes)
                     },(err)=>{
                         if(err) console.error(err)
                         else {                       
-                        task.snapshot.ref.getDownloadURL().then((result)=>{
-                            console.log(result)
-                            setperson((prev) => ({ ...prev, imageURL: result }))
-                        })
+                        
                     }
+                    })
+                    task.then((snapshot)=>{
+                        snapshot.ref.getDownloadURL().then((result)=>{
+                        console.log(result)
+                        setperson((prev) => ({ ...prev, imageURL: result }))
+                        })
                     })
                 }}
             />}
-            {status===100 || status===0 ? <img src={imageURL} className="round-img logo" alt="l" />
-            :
+            {imageURL==='' &&
             status>0 && <progress value={status} max="100" style={{width:"100%"}}/>}
             <br/>
             <label>Partner Name</label>

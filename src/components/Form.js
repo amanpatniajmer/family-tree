@@ -71,20 +71,23 @@ const Form = ({ location }) => {
     return (
         <div>
             <div className="form-container">
+                
                 {
                     path && path.map((item, index) => {
                         return <span key={path.slice(0, index + 1).join('/')} >
                             <a href={`/add?path=${path.slice(0, index + 1).join('/')}`}>
-                            
                                 <span className="text-light">{
                                     //eslint-disable-next-line
-                                (partialpath && eval(partialpath[index]+".name")) || item} </span>
+                                (partialpath && eval(partialpath[index]+".name")
+
+                                ) || item} </span>
                             </a>
                             / </span>
                     })
                 }
                 <br/>
                 <button className="btn btn-dark" onClick={()=>{history.goBack()}}> Go Back</button>
+                <button className="btn btn-white" style={{float:"right"}}onClick={()=>{localStorage.removeItem('id'); history.push('/');}}> Logout <i className="fa fa-sign-out" style={{margin:"0"}}/></button>
                 {person && (!person.children || mode === "edit" ?
                     <Fields refe={ref} location={completepath} person={person} setperson={setperson} />
                     :
