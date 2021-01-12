@@ -25,8 +25,8 @@ function App() {
     <Router>
       <ContextProvider>
         <Switch>
+          <Route exact path="/" render={(props)=><New {...props}/>}/>
           <Route exact path="/add" render={(props)=><Form {...props}/>}/>
-          <Route exact path="/new" render={(props)=><New {...props}/>}/>
           <Route exact path="/tree" render={(props)=><Tree {...props}/>}/>
           <Route exact path="/" render={(props)=><Tree {...props}/>}/>
           <div className="App">
