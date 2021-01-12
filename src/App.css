@@ -31,6 +31,17 @@
   animation: rotate 1500ms infinite ease;
 }
 
+.logo {
+  margin: auto;
+  max-height: 50px;
+  max-width: 50px;
+  transition: all 0.5s;
+}
+
+.logo:hover{
+  transform: scale(1.5);
+}
+
 .center {
   margin-left: auto;
   margin-right: auto;
@@ -452,6 +463,7 @@ label {
 }
 
 input[type="text"],
+input[type="file"],
 input[type="number"],
 input[type="email"],
 input[type="password"],

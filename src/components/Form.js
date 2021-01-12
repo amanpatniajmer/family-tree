@@ -5,7 +5,7 @@ import Fields from './Fields';
 import Links from './Links';
 import queryString from "query-string";
 import { Context } from "../context/Context";
-import database from '../Firebase'
+import {database} from '../Firebase'
 
 const Form = ({ location }) => {
     const history=useHistory()

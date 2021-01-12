@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import database from '../Firebase'
-import { useHistory} from 'react-router-dom'
+import { database, storage } from '../Firebase'
+import { useHistory } from 'react-router-dom'
+import aj from '../images/aman passport.jpg'
 
-const Fields = ({ person, setperson,refe,location }) => {
-    const history=useHistory();
-    const { name, gender, noc, partner,children } = person;
+const Fields = ({ person, setperson, refe, location }) => {
+    const history = useHistory();
+    const [showimage, setshowimage] = useState(true)
+    const [status, setstatus] = useState(0)
+    const { name, gender, noc, partner, children, imageURL } = person;
     useEffect(() => {
-        if(!person.children){
-            setperson((prev)=>({...prev,children:[]}))
+        if (!person.children) {
+            setperson((prev) => ({ ...prev, children: [] }))
         }
         //eslint-disable-next-line
     }, [])
@@ -16,10 +19,10 @@ const Fields = ({ person, setperson,refe,location }) => {
     const add = (e) => {
         e.preventDefault();
         setLoading(true);
-        database().ref(refe).update(person).then((result)=>{
-            console.log("Success",result)
+        database().ref(refe).update(person).then((result) => {
+            console.log("Success", result)
             setLoading(false)
-            history.push(`/add?path=${location}`)
+            history.goBack()
         })
     }
     return (<>
@@ -50,6 +53,32 @@ const Fields = ({ person, setperson,refe,location }) => {
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
             </select>
+            <label>Passport/close-up pic</label>
+            <br />
+            
+            {showimage && imageURL ? <button type="button" className="btn" onClick={()=>setshowimage(false)}>Change Picture</button>
+            :<input type="file" name="imageURL" accept="image/*"
+                onChange={(e) => {
+                    const val = e.target.files[0];
+                    console.log(val)
+                    var task=storage().ref(refe).put(val)
+                    task.on('state_changed',(snapshot) => {
+                        setstatus(snapshot.bytesTransferred*100/snapshot.totalBytes)
+                    },(err)=>{
+                        if(err) console.error(err)
+                        else {                       
+                        task.snapshot.ref.getDownloadURL().then((result)=>{
+                            console.log(result)
+                            setperson((prev) => ({ ...prev, imageURL: result }))
+                        })
+                    }
+                    })
+                }}
+            />}
+            {status===100 || status===0 ? <img src={imageURL} className="round-img logo" alt="l" />
+            :
+            status>0 && <progress value={status} max="100" style={{width:"100%"}}/>}
+            <br/>
             <label>Partner Name</label>
             <input
                 type="text"
@@ -70,12 +99,14 @@ const Fields = ({ person, setperson,refe,location }) => {
                 onChange={(e) => {
                     const val = e.target.value;
                     setperson((prev) => ({ ...prev, noc: val }))
-                    let arr=[]
-                    for(let i=0;i<val-children.length;++i){
-                        arr.push({name: '', gender: 'Male', partner: '', noc:0, children: []})
+                    let arr = []
+                    for (let i = 0; i < val - children.length; ++i) {
+                        arr.push({ name: '', gender: 'Male', partner: '',imageURL: '', noc: 0, children: [] })
                     }
-                    setperson((prev)=>({...prev, children:[...children,...arr
-                    ]}))
+                    setperson((prev) => ({
+                        ...prev, children: [...children, ...arr
+                        ]
+                    }))
                 }}
                 placeholder="Enter number"
                 autoComplete="off"
@@ -85,7 +116,7 @@ const Fields = ({ person, setperson,refe,location }) => {
                 {loading ? <i className="fa fa-spinner fa-spin" /> : "Submit"}
             </button>
         </form>
-        </>
+    </>
     )
 }
 

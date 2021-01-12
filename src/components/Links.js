@@ -1,5 +1,5 @@
 import React from 'react'
-import database from '../Firebase';
+import {database} from '../Firebase';
 
 const Links = ({ person, setperson, location, refe }) => {
 
@@ -24,7 +24,6 @@ const Links = ({ person, setperson, location, refe }) => {
                 <span>Name: {person.name}</span>
                 <span>Gender: {person.gender}</span>
                 <span>Partner: {person.partner}</span>
-                <span>No of Children: {person.noc}</span>
             </div>
             <br/>
             <h3 style={{ borderBottom: "1px solid #ececec" }}>Children</h3>

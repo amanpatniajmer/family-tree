@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useState } from 'react'
-import database from '../Firebase'
+import {database} from '../Firebase'
 import { useHistory } from 'react-router-dom'
 import { Context } from "../context/Context";
 
@@ -17,7 +17,7 @@ const New = () => {
         setloading(true)
         
         database().ref('users/' + email.replace(/\./g,'')).update(
-            { name: '', gender: 'Male', partner: '', noc: 0, children: null },
+            { name: '', gender: 'Male', partner: '', noc: 0, imageURL:'',children: null },
             (error) => {
                 if (error) {
                     setloading(false)
