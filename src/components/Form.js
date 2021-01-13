@@ -38,8 +38,22 @@ const Form = ({ location }) => {
             database().ref('users/'+path[0]).once('value', (result) => {
                 setallrecords(result.val())
                 if(!result.val()){
-                    setloading(false);
-                    alert('Bad Parameters given')
+                    database().ref('users/' + path[0]).update(
+                        { name: '', gender: 'Male', partner: '', noc: 0, imageURL: '', children: null },
+                        (error) => {
+                            if (error) {
+                                setloading(false)
+                                console.error(error)
+                            }
+                            else {
+                                setloading(false)
+                                localStorage.setItem('id', path[0])
+                                localStorage.setItem('new', true)
+                                console.log('Done')
+                                history.push(`/add?path=${localStorage.getItem('id')}`)
+                            }
+                        })
+                    
                     return;
                 }
                 /* console.log(result.val()) */
@@ -80,14 +94,16 @@ const Form = ({ location }) => {
                                     //eslint-disable-next-line
                                 (partialpath && eval(partialpath[index]+".name")
 
-                                ) || Number(item)+1} </span>
+                                ) || (Number(item)/1000000000? Number(item):Number(item)+1)}</span>
                             </a>
-                            / </span>
+                            &nbsp;<i className="fa fa-chevron-right"/></span>
                     })
                 }
                 <br/>
-                <button className="btn btn-dark" onClick={()=>{history.goBack()}}> Go Back</button>
-                <button className="btn btn-white" style={{float:"right"}}onClick={()=>{localStorage.removeItem('id'); history.push('/');}}> Logout <i className="fa fa-sign-out" style={{margin:"0"}}/></button>
+                <div style={{borderBottom:"2px solid black", paddingBottom:"10px", marginBottom:"10px"}}>
+                <button className="btn btn-white" onClick={()=>{history.goBack()}}><i className="fa fa-arrow-left" style={{margin:"0"}}/> Go Back</button>
+                <button className="btn btn-white" style={{float:"right"}}onClick={()=>{localStorage.removeItem('id'); history.push('/');}}> Logout <i className="fa fa-home" style={{margin:"0"}}/></button>
+                </div>
                 {person && (!person.children || mode === "edit" ?
                     <Fields refe={ref} location={completepath} person={person} setperson={setperson} />
                     :

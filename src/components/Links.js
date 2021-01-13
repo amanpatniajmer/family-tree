@@ -5,18 +5,21 @@ const Links = ({ person, setperson, location, refe }) => {
 
     const deleteChild = (index) => {
         console.log(refe + "children/" + index.toString())
+        const input=prompt("Are you sure you want to delete this item?");
+        if(input==="Yes" || input==="yes" ||input=== "y" ||input=== "Y"){
         database().ref(refe + "children/" + index.toString()).remove().then(() => {
             database().ref(refe).update({ noc: person.noc - 1 }).then((res) => {
                 window.location.reload();
             })
         })
     }
+    }
 
     return (
         <>
         <div>
             <div className="container alert-success" style={{position:"relative",width:"100%", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-                <h3 style={{ borderBottom: "1px solid #ececec" }}>
+                <h3 style={{ borderBottom: "1px solid #ececec", paddingBottom:"5px" }}>
                     <span>Parent</span>
                     <span style={{ float: "right" }}>
                         <a href={`/add?path=${location}&mode=edit`}><i className="btn fa fa-edit" style={{ margin: "0" }} /></a>
@@ -44,11 +47,13 @@ const Links = ({ person, setperson, location, refe }) => {
 
                             }
                             }>
-                            <span className="btn btn-white">{index+1}</span>
-                            <span>Name: {i.name}
+                            <span className="btn btn-white">{index+1}
                                 <span style={{float:"right"}}>
                                     <i className="btn btn-danger fa fa-trash" onClick={() => deleteChild(index)} />
                                 </span>
+                            </span>
+                            <span>Name: {i.name}
+                                
                             </span>
 
                             <span>Gender: {i.gender}</span>

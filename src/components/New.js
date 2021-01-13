@@ -1,11 +1,11 @@
 import React, { useEffect, useContext, useState } from 'react'
-import { database } from '../Firebase'
+/* import { database } from '../Firebase' */
 import { useHistory } from 'react-router-dom'
 import { Context } from "../context/Context";
 
 const New = () => {
     const [id, setid] = useState('');
-    const [phone, setphone] = useState('');
+    /* const [phone, setphone] = useState(''); */
     //eslint-disable-next-line
     const [loading, setloading] = useContext(Context)
     useEffect(() => {
@@ -13,11 +13,11 @@ const New = () => {
         //eslint-disable-next-line
     }, [])
     const history = useHistory();
-    const newRecord = (e) => {
+    /* const newRecord = (e) => {
         e.preventDefault();
         setloading(true)
 
-        database().ref('users/' + phone.replace(/\./g, '')).update(
+        database().ref('users/' + phone).update(
             { name: '', gender: 'Male', partner: '', noc: 0, imageURL: '', children: null },
             (error) => {
                 if (error) {
@@ -26,18 +26,18 @@ const New = () => {
                 }
                 else {
                     setloading(false)
-                    localStorage.setItem('id', phone.replace(/\./g, ''))
+                    localStorage.setItem('id', phone)
                     console.log('Done')
-                    history.push(`/add?path=${localStorage.getItem('id')}&mode=edit`)
+                    history.push(`/add?path=${localStorage.getItem('id')}`)
                 }
             })
 
-    }
+    } */
 
     const editRecord = (e) => {
         e.preventDefault();
         setloading(true)
-        localStorage.setItem('id', id.replace(/\./g, ''))
+        localStorage.setItem('id', id)
         console.log('Done')
         history.push(`/add?path=${localStorage.getItem('id')}`)
 
@@ -45,31 +45,20 @@ const New = () => {
     return (
         <div className="form-container">
             <h1>Welcome!</h1>
-            <h3 className="text-success">Family Tree <i className="fa fa-tree text-success"/></h3>
+            <h3 className="text-success">Family <a href={`/tree?path=${id}`}>Tree </a><i className="fa fa-tree text-success"/></h3>
             <br />
 
-            <span className="">Create new record to proceed</span>
-            <form onSubmit={newRecord}>
-            <div className="form-group">
-                <label className="">Mobile No (10 digits)</label>
-                <input type="tel" pattern="[0-9]{10}" value={phone} onChange={(e) => {
-                    const val = e.target.value;
-                    setphone(val)
-                }} placeholder="Enter mobile no" />
-            </div>
-            <button type="submit" className="btn btn-block btn-success"> Submit <i className="fa fa-plus" /> </button>
-            </form>
+            <span className="">Enter mobile number to proceed.</span>
             <br />
-            <center>OR</center>
-            <br />
-            <span className="">Edit an existing record</span>
             <form onSubmit={editRecord}>
-                <input type="tel" pattern="[0-9]{10}" value={id} onChange={(e) => {
-                    const val = e.target.value;
-                    setid(val)
-                }} placeholder="Enter registered mobile no" />
-                <button type="submit" className="btn btn-dark btn-block" style={{ marginRight: "0" }}>
-                    <span className="optional">Submit </span> <i className="fa fa-edit" style={{ marginRight: "0" }} /> </button>
+                <div className="form-group">
+                    <label className="">Mobile No (10 digits)</label>
+                    <input type="tel" pattern="[0-9]{10}" value={id} onChange={(e) => {
+                        const val = e.target.value;
+                        setid(val)
+                    }} placeholder="Enter mobile no" />
+                </div>
+                <button type="submit" className="btn btn-block btn-success"> Submit <i className="fa fa-plus" /> </button>
             </form>
         </div>
     )

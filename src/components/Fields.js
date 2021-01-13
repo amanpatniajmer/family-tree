@@ -20,13 +20,15 @@ const Fields = ({ person, setperson, refe, location }) => {
         database().ref(refe).update(person).then((result) => {
             console.log("Success", result)
             setLoading(false)
-            history.push(`/add?path=${location}`)
+            localStorage.removeItem('new')
+            /* history.push(`/add?path=${location}`) */
+            history.goBack()
         })
     }
     return (<>
         <form className="form-group" onSubmit={(e) => { add(e) }}>
             <h1 className="text-primary">{" "}
-                <span className="text-dark">Add </span> Data{" "}
+                <span className="text-dark">Add {localStorage.getItem('new') && "Root"}</span> Data{" "}
             </h1>
             <label>Name</label>
             <input
