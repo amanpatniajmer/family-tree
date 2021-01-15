@@ -31,6 +31,11 @@ const New = () => {
     //eslint-disable-next-line
     const [loading, setloading] = useContext(Context)
     useEffect(() => {
+        Firebase.auth().onAuthStateChanged((user)=>{
+            if(user){
+                history.push('/add?path=0')
+            }
+        })
         setloading(false);
         //eslint-disable-next-line
     }, [])
