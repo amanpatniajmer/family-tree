@@ -726,6 +726,30 @@ img {
 	color: blue !important;
 }
 
+.structure ul li{
+  margin: 5px 0;
+  margin-left: 20px;
+  list-style-type:decimal;
+  line-height: 2rem;
+}
+
+.structure ul{
+  border-left: 2px solid #ececec;
+}
+
+.structure ul li a{
+  border-radius: 5px;
+  padding: 5px;
+  display: block;
+  /* text-decoration:underline;*/
+  color: #000;
+  background-color: #ececec; 
+}
+
+.structure li a:hover{
+  background-color: #888;
+}
+
 .tree li {
 	float: left;
 	text-align: center;

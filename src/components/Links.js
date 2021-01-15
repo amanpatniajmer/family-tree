@@ -5,8 +5,7 @@ const Links = ({ person, setperson, location, refe }) => {
 
     const deleteChild = (index) => {
         console.log(refe + "children/" + index.toString())
-        const input=prompt("Are you sure you want to delete this item?");
-        if(input==="Yes" || input==="yes" ||input=== "y" ||input=== "Y"){
+        if(console.log(window.confirm("Deleting this item?"))){
         database().ref(refe + "children/" + index.toString()).remove().then(() => {
             database().ref(refe).update({ noc: person.noc - 1 }).then((res) => {
                 window.location.reload();
@@ -61,14 +60,16 @@ const Links = ({ person, setperson, location, refe }) => {
                             {i.gender==="Male" && <span>No of Children: {i.noc}</span>}
 
                             <div style={{textAlign:"center"}}>
-                                {i.name && <span style={{ marginLeft: "auto"}}>
+                                {(i.name && i.noc) ? <span style={{ marginLeft: "auto"}}>
                                     <a href={`/add?path=${location}/${index}`} style={{textDecoration:"none" }} className="btn btn-dark">
                                         Children <i className="fa fa-edit" /></a>
-                                </span>}
+                                </span>
+                                :null
+                                }
                                 
                                 <span>
                                     <a href={`/add?path=${location}/${index}&mode=edit`} style={{textDecoration:"none" }} className="btn btn-dark">
-                                         <i className="fa fa-edit" style={{margin:"0"}}/></a>
+                                        {i.name ? "Edit " : "Add "} <i className="fa fa-edit" style={{margin:"0"}}/></a>
                                 </span>
                                 
                             </div>
