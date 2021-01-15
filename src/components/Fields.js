@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom'
 const Fields = ({ person, setperson, refe, location }) => {
     const history = useHistory();
     const [status, setstatus] = useState(0)
+    const [submit,setsubmit]=useState(true)
     const { name, gender, noc, partner, children, imageURL } = person;
     useEffect(() => {
         if (!person.children) {
@@ -63,6 +64,7 @@ const Fields = ({ person, setperson, refe, location }) => {
             :<input type="file" name="imageURL" accept="image/*"
                 onChange={(e) => {
                     const val = e.target.files[0];
+                    setsubmit(false)
                     var task=storage().ref(refe).put(val)
                     task.on('state_changed',(snapshot) => {
                         setstatus(snapshot.bytesTransferred*100/snapshot.totalBytes)
@@ -76,6 +78,7 @@ const Fields = ({ person, setperson, refe, location }) => {
                         snapshot.ref.getDownloadURL().then((result)=>{
                         console.log(result)
                         setperson((prev) => ({ ...prev, imageURL: result }))
+                        setsubmit(true)
                         })
                     })
                 }}
@@ -118,7 +121,7 @@ const Fields = ({ person, setperson, refe, location }) => {
                 required
             />
             </>}
-            <button type="submit" className="btn btn-block btn-success">
+            <button type="submit" disabled={!submit} className="btn btn-block btn-success">
                 {loading ? <i className="fa fa-spinner fa-spin" /> : "Submit"}
             </button>
         </form>
