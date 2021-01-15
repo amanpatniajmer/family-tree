@@ -21,7 +21,7 @@ const Register = () => {
                 console.log(user)
                 if(user) 
                 Firebase.auth().currentUser.sendEmailVerification({
-                    url:'http://family-tree-47404.web.app',
+                    url:'http://family-tree-47404.web.app/add?path=0',
                 }).then((result) => {
                     history.push('/add?path=0')
                     console.log(result)
