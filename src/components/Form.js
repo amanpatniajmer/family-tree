@@ -39,8 +39,8 @@ const Form = ({ location }) => {
                 }
                 else {
                     alert('Please verify your email address. Check your email account')
-                    history.push('/')
                     Firebase.auth().signOut();
+                    history.push('/')
                     return;
                 }
                 
