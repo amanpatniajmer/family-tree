@@ -8,9 +8,10 @@ const Structure = ({allrecords}) => {
     const colors=["ee6055","60d394","aaf683","ffd97d","ff9b85"]
     function makeNode(person,index,path,depth) {
         let a = (
-            <li key={person.name}>
-                <a href={`/add?path=${path}`} className="btn btn-white" style={{backgroundColor:`#${colors[depth]}`}}>
+            <li key={person.name} style={{position:"relative"}}>
+                <a href={`/add?path=${path}`} className="btn btn-white" style={{backgroundColor:`#${colors[depth%5]}`}}>
                     {/* {index+"-"} */}{person.name + (person.partner && " - "+person.partner)}
+                    {person.imageURL && <img src={person.imageURL} className="logo round-img" alt="" style={{position:"absolute", right:"12px",top:'0px',width:"43px",height:"43px"}}/>}
                 </a>
                 {person.children && person.children.length > 0 &&
                     <ul>
@@ -27,6 +28,7 @@ const Structure = ({allrecords}) => {
     }
     return (
         <div className="structure">
+            <h2 className="text-success">Family <a href={`/tree?path=0`}>Tree </a><i className="fa fa-tree text-success" /></h2>
             {
                 allrecords && <ul>{makeNode(allrecords,1,localStorage.getItem('id'),0)}</ul>
             }
