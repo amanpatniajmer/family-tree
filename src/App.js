@@ -6,6 +6,7 @@ import { ContextProvider } from './context/Context';
 import New from './components/New';
 import Tree from './components/Tree';
 import Register from './components/Register';
+import Instructions from './components/Instructions';
 import ErrorBoundary from "./components/ErrorBoundary";
 /* import Tree from './Tree'; */
 
@@ -32,6 +33,7 @@ function App() {
           <Route exact path="/add" render={(props)=><Form {...props}/>}/>
           <Route exact path="/tree" render={(props)=><Tree {...props}/>}/>
           <Route exact path="/register" render={(props)=><Register {...props}/>}/>
+          <Route exact path="/instructions" render={(props)=><Instructions {...props}/>}/>
           <Route exact path="/" render={(props)=><Tree {...props}/>}/>
           <div className="App">
           </div>

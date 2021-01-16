@@ -33,7 +33,7 @@ const New = () => {
     useEffect(() => {
         Firebase.auth().onAuthStateChanged((user)=>{
             if(user){
-                history.push('/add?path=0')
+                history.push('/instructions')
             }
         })
         setloading(false);

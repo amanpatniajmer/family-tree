@@ -32,7 +32,7 @@ const Structure = ({allrecords}) => {
             <h2 className="text-success" style={{borderBottom:"5px solid green"}}>"{allrecords && allrecords.family}" <a href={`/tree?path=0`}>Family Tree </a><i className="fa fa-tree text-success" style={{fontSize:"3rem"}} /></h2>
             <center><h4>Contact: {allrecords && allrecords.address}
             <br/>
-            {allrecords && allrecords.mobile}
+            <i className="fa fa-phone"/>: {allrecords && allrecords.mobile}
             </h4></center>
             </div>
             {
