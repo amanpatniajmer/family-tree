@@ -28,7 +28,13 @@ const Structure = ({allrecords}) => {
     }
     return (
         <div className="structure">
-            <h2 className="text-success">Family <a href={`/tree?path=0`}>Tree </a><i className="fa fa-tree text-success" /></h2>
+            <div>
+            <h2 className="text-success" style={{borderBottom:"5px solid green"}}>"{allrecords && allrecords.family}" <a href={`/tree?path=0`}>Family Tree </a><i className="fa fa-tree text-success" style={{fontSize:"3rem"}} /></h2>
+            <center><h4>Contact: {allrecords && allrecords.address}
+            <br/>
+            {allrecords && allrecords.mobile}
+            </h4></center>
+            </div>
             {
                 allrecords && <ul>{makeNode(allrecords,1,localStorage.getItem('id'),0)}</ul>
             }
