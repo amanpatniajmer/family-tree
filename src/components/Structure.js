@@ -36,7 +36,7 @@ const Structure = ({allrecords}) => {
             </h4></center>
             </div>
             {
-                allrecords && <ul>{makeNode(allrecords,1,localStorage.getItem('id'),0)}</ul>
+                allrecords && <ul>{makeNode(allrecords,1,0,0)}</ul>
             }
         </div>
     )
