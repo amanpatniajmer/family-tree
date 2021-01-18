@@ -2,8 +2,6 @@ import React, { useEffect, useState, useContext } from 'react'
 import queryString from "query-string";
 import { database } from "../Firebase";
 import { Context } from "../context/Context";
-import { jsPDF } from 'jspdf'
-import html2canvas from "html2canvas";
 
 const Tree = ({ location }) => {
     const colors = ["ee6055", "60d394", "aaf683", "ffd97d", "ff9b85"]
