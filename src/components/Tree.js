@@ -3,6 +3,7 @@ import queryString from "query-string";
 import { database } from "../Firebase";
 import { Context } from "../context/Context";
 import { jsPDF } from 'jspdf'
+import html2canvas from "html2canvas";
 
 const Tree = ({ location }) => {
     const colors = ["ee6055", "60d394", "aaf683", "ffd97d", "ff9b85"]
@@ -33,17 +34,24 @@ const Tree = ({ location }) => {
     }, [])
 
     const save = () => {
-        const doc = new jsPDF({
+        window.print()
+        /* const doc = new jsPDF({
             orientation: "landscape",
             unit: "px",
             format: [document.body.scrollWidth, document.body.scrollHeight]
         });
+        html2canvas(document.getElementsByClassName('tree')[0],{
+            allowTaint: true,
+            useCORS: true
+        }).then((canvas)=>{
+            console.log(canvas)
+        }) */
 
-        doc.html(document.body.innerHTML, {
+        /* doc.html(document.body.innerHTML, {
             callback: function (pdf) {
                 pdf.save("two-by-four.pdf")
             }
-        });
+        }); */
     }
     function makeNode(person, depth) {
         let a = (
@@ -69,7 +77,7 @@ const Tree = ({ location }) => {
 
     return (
         <div className="tree">
-            <button className="btn" onClick={save}>SAVE</button>
+            <button className="btn" id="printBtn" onClick={save}>SAVE</button>
             <div style={{ borderBottom: "5px solid green" }}>
                 <h2 className="text-success">"{data && data.family}" <a href={`/tree?path=0`}>Family Tree </a><i className="fa fa-tree text-success" style={{ fontSize: "3rem" }} /></h2>
                 <center><h4>Contact: {data && data.address}
