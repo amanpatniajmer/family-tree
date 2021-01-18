@@ -704,7 +704,7 @@ table th {
     margin: 0;
   }
   @page{
-    size: A3 landscape;
+    size: 42.0cm 29.7cm;
   }
 }
 
